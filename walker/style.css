@@ -1,0 +1,89 @@
+@import "../../../../current/theme/walker.css";
+
+/* reset */
+* {
+  all: unset;
+  font-family: "JetBrains Mono", monospace;
+}
+
+/* normal & large icons */
+.normal-icons { -gtk-icon-size: 16px; }
+.large-icons { -gtk-icon-size: 28px; }
+
+/* scrollbars */
+scrollbar { opacity: 0; }
+
+/* main container (boxy, sharp edges) */
+.box-wrapper {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+  background: rgba(20, 20, 20, 0.85); /* slightly transparent dark */
+  padding: 12px;
+  border-radius: 0px; /* sharp edges */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* white border */
+  width: 360px;
+}
+
+/* text colors */
+.preview-box,
+.elephant-hint,
+.placeholder,
+.list,
+.item-text,
+.item-subtext {
+  color: rgba(255, 255, 255, 0.9); /* white text */
+}
+
+.item-subtext {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+/* item boxes */
+.item-box {
+  border-radius: 0px; /* sharp edges */
+  padding: 8px;
+  margin: 2px 0;
+  transition: background 0.1s ease;
+}
+
+child:hover .item-box,
+child:selected .item-box {
+  background: rgba(255, 255, 255, 0.1); /* subtle hover effect */
+}
+
+/* quick activation */
+.item-quick-activation {
+  margin-left: 6px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 0px;
+  padding: 4px 6px;
+}
+
+/* search input */
+.input {
+  caret-color: rgba(255, 255, 255, 0.9);
+  background: rgba(30, 30, 30, 0.6);
+  padding: 6px 8px;
+  border-radius: 0px;
+}
+
+/* preview */
+.preview {
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 6px;
+  border-radius: 0px;
+  color: rgba(255, 255, 255, 1);
+}
+
+/* larger preview icons */
+.preview .large-icons {
+  -gtk-icon-size: 48px;
+}
+
+/* keybinds */
+.keybinds-wrapper {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 11px;
+  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.9);
+}
