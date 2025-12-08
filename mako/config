@@ -1,0 +1,67 @@
+# 1. GLOBAL DEFAULTS (Minimal + Solid + Center)
+# ==============================================
+# Position: TOP CENTER
+anchor=top-right
+# Small compact box
+padding=8
+margin=12
+width=320
+# Nord theme colors
+background-color=#2e3440
+text-color=#d8dee9
+border-size=1
+border-color=#88c0d0
+font=JetBrainsMono Nerd Font 11
+default-timeout=3000
+max-icon-size=28
+format=<b>%s</b>\n%b
+# ==============================================
+# 2. GHOST HUD (Time / Wifi Check)
+# ==============================================
+[app-name=ghost-hud]
+# Position: Top right
+anchor=top-right
+# Tight compact box
+margin=6
+padding=6
+width=300
+height=200
+# Nord theme colors
+background-color=#2e3440
+text-color=#eceff4
+border-size=2
+border-color=#88c0d0
+# Clean 2-line format
+format=<b>%s</b>\n<span foreground="#d8dee9">%b</span>
+# Matching minimal font
+font=JetBrainsMono Nerd Font 12
+[app-name=volume-osd]
+# Make the font large so the "bar" glyphs look like big icons
+# ==============================================
+# Keep the container tight and compact
+width=120
+height=60
+padding=10
+margin=10
+# Optional: Center text and remove border for a cleaner "overlay" look
+text-alignment=center
+font=JetBrainsMono Nerd Font 10
+border-size=2
+border-color=#88c0d0
+# Optional: If you ONLY want to see the bar and hide the "Volume: 50%" text
+# format=%b
+[app-name=brightness-osd]
+# Make the font large so the "bar" glyphs look like big icons
+# ==============================================
+# Keep the container tight and compact
+width=120
+height=60
+padding=10
+margin=10
+# Optional: Center text and remove border for a cleaner "overlay" look
+text-alignment=center
+font=JetBrainsMono Nerd Font 10
+border-size=2
+border-color=#88c0d0
+# Optional: If you ONLY want to see the bar and hide the "Volume: 50%" text
+# format=%b
