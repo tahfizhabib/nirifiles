@@ -1,0 +1,404 @@
+// ========================================
+//
+//        MIQIM'S NIRIFILES
+//
+// ========================================
+
+// ========================================
+// INPUT
+// ========================================
+
+input {
+    keyboard {
+        xkb {}
+        numlock
+    }
+    touchpad {
+        tap
+        natural-scroll
+    }
+}
+
+// ========================================
+// OUTPUTS
+// ========================================
+
+output "DP-1" {
+    mode "1920x1080@319.998"
+    scale 1
+    position x=0 y=0
+}
+
+output "HDMI-A-1" {
+    mode "1920x1080@75"
+    scale 1
+    position x=1920 y=0
+}
+
+// ========================================
+// NAMED WORKSPACES (ALWAYS VISIBLE)
+// ========================================
+
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+workspace "5"
+
+// ========================================
+// LAYOUT
+// ========================================
+
+layout {
+    gaps 5
+    center-focused-column "never"
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    default-column-width { proportion 0.5; }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        width 1.5
+        active-color "#5f8fff"
+        inactive-color "#45475a"
+    }
+}
+
+// ========================================
+// STARTUP
+// ========================================
+
+spawn-at-startup "waybar"
+spawn-sh-at-startup "swaybg -i ~/Wallpapers/wall1.jpg"
+spawn-sh-at-startup "vicinae server"
+spawn-sh-at-startup "walker --gapplication-service"
+
+// ========================================
+// GENERAL SETTINGS
+// ========================================
+
+// Cursor configuration
+cursor {
+    xcursor-theme "Adwaita"
+    xcursor-size 24
+}
+
+hotkey-overlay {
+    skip-at-startup
+}
+
+prefer-no-csd
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// ========================================
+// ANIMATIONS (XansiVA Custom Shaders)
+// ========================================
+
+animations {
+    // Apple-style smooth but fast workspace switching
+    workspace-switch {
+        spring damping-ratio=1.0 stiffness=800 epsilon=0.0001
+    }
+
+    window-open {
+        duration-ms 1400
+        curve "ease-out-expo"
+        custom-shader r"
+        float ease_curve(float x) {
+            return x < 0.5 ? 4.0*x*x*x : 1.0 - pow(-2.0*x + 2.0, 3.0)/2.0;
+        }
+        vec4 open_color(vec3 coords_geo, vec3 size_geo) {
+            float t = niri_clamped_progress;
+            float prog = ease_curve(t);
+            // bottom-right corner
+            vec2 start = vec2(1.0, 1.0);
+            // compute distance along diagonal from corner
+            vec2 p = coords_geo.xy;
+            vec2 dir = vec2(-1.0, -1.0); // vector toward top-left
+            float dist = dot(p - start, dir);
+            // normalize distance to max diagonal (from corner to opposite)
+            float max_diag = 2.0;
+            float norm_dist = dist / max_diag;
+            // pixels not yet reached by sweep are invisible
+            if (norm_dist > prog) {
+                return vec4(0.0);
+            }
+            // sample normally
+            vec3 coords_tex = niri_geo_to_tex * coords_geo;
+            vec4 col = texture2D(niri_tex, coords_tex.xy);
+            return col;
+        }"
+    }
+
+    window-close {
+        duration-ms 1400
+        curve "ease-out-expo"
+        custom-shader r"
+        // ease-in-out cubic curve helper
+        float ease_curve(float x) {
+            return x < 0.5 ? 4.0*x*x*x : 1.0 - pow(-2.0*x + 2.0, 3.0)/2.0;
+        }
+        vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+            float t = niri_clamped_progress;
+            float prog = ease_curve(t);
+            // choose corner: 0=top-left,1=top-right,2=bottom-left,3=bottom-right
+            int corner = 0;
+            vec2 start;
+            if (corner == 0) start = vec2(0.0,0.0);
+            else if (corner == 1) start = vec2(1.0,0.0);
+            else if (corner == 2) start = vec2(0.0,1.0);
+            else start = vec2(1.0,1.0);
+            // compute distance along diagonal from corner
+            vec2 p = coords_geo.xy;
+            float dist = dot(p - start, vec2(1.0,1.0));
+            // normalize distance to max diagonal
+            float max_diag = 2.0; // max of vec2(1,1)
+            float norm_dist = dist / max_diag;
+            // If pixel is behind the sweeping line, make it invisible
+            if (norm_dist <= prog) {
+                return vec4(0.0);
+            }
+            // sample normally
+            vec3 coords_tex = niri_geo_to_tex * coords_geo;
+            vec4 col = texture2D(niri_tex, coords_tex.xy);
+            return col;
+        }"
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=0.85 stiffness=423 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=0.75 stiffness=323 epsilon=0.0001
+    }
+
+    window-resize {
+        custom-shader r"
+            vec4 resize_color(vec3 coords_curr_geo, vec3 size_curr_geo) {
+                vec3 coords_tex_next = niri_geo_to_tex_next * coords_curr_geo;
+                vec4 color = texture2D(niri_tex_next, coords_tex_next.st);
+                return color;
+            }
+        "
+    }
+
+    config-notification-open-close {
+        spring damping-ratio=0.65 stiffness=923 epsilon=0.001
+    }
+
+    screenshot-ui-open {
+        duration-ms 200
+        curve "ease-out-quad"
+    }
+
+    overview-open-close {
+        spring damping-ratio=0.85 stiffness=800 epsilon=0.0001
+    }
+}
+
+// ========================================
+// OVERVIEW (WITH WALLPAPER BACKDROP)
+// ========================================
+
+overview {
+    workspace-shadow {
+        off
+    }
+}
+
+// ========================================
+// LAYER RULES (SWAYBG IN OVERVIEW)
+// ========================================
+
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop false
+}
+
+// ========================================
+// WINDOW RULES
+// ========================================
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"foot|alacritty|kitty|wezterm"#
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match title=r#"^(Open|Save|Select|Choose)"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^(pavucontrol|gnome-calculator|org\.gnome\.Calculator)$"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"spotify"#
+    default-column-width { proportion 0.66667; }
+}
+
+window-rule {
+    match app-id=r#"nautilus|org\.gnome\.Nautilus"#
+    default-column-width { proportion 0.66667; }
+}
+
+window-rule {
+    geometry-corner-radius 0
+    clip-to-geometry true
+}
+
+window-rule {
+    match app-id="dev.zed.Zed"
+    tiled-state true
+}
+
+// ========================================
+// KEYBINDINGS
+// ========================================
+
+binds {
+    Mod+Shift+Slash { show-hotkey-overlay; }
+
+    // Applications
+    Mod+Return { spawn "foot"; }
+    Mod+T { spawn "foot"; }
+    Mod+N { spawn "foot" "nvim"; }
+    Mod+B { spawn "firefox"; }
+    Mod+D { spawn-sh "nc -U /run/user/1000/walker/walker.sock"; }
+    Mod+E { spawn "nautilus"; }
+    Mod+Shift+M { spawn "spotify"; }
+    Mod+Shift+C { spawn "gnome-calendar"; }
+
+    // Vicinae
+    Mod+Space repeat=false { spawn "vicinae" "toggle"; }
+
+    // System
+    Super+Alt+L { spawn "swaylock"; }
+    Mod+Q repeat=false { close-window; }
+    Mod+O repeat=false { toggle-overview; }
+
+    // Focus
+    Mod+Left  { focus-column-left; }
+    Mod+Down  { focus-window-down; }
+    Mod+Up    { focus-window-up; }
+    Mod+Right { focus-column-right; }
+    Mod+H     { focus-column-left; }
+    Mod+J     { focus-window-down; }
+    Mod+K     { focus-window-up; }
+    Mod+L     { focus-column-right; }
+
+    // Move windows
+    Mod+Ctrl+Left  { move-column-left; }
+    Mod+Ctrl+Down  { move-window-down; }
+    Mod+Ctrl+Up    { move-window-up; }
+    Mod+Ctrl+Right { move-column-right; }
+    Mod+Ctrl+H     { move-column-left; }
+    Mod+Ctrl+J     { move-window-down; }
+    Mod+Ctrl+K     { move-window-up; }
+    Mod+Ctrl+L     { move-column-right; }
+
+    // Focus monitors
+    Mod+Shift+Left  { focus-monitor-left; }
+    Mod+Shift+Right { focus-monitor-right; }
+    Mod+Shift+H     { focus-monitor-left; }
+    Mod+Shift+L     { focus-monitor-right; }
+
+    // Move to monitors
+    Mod+Shift+Ctrl+Left  { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+Right { move-column-to-monitor-right; }
+    Mod+Shift+Ctrl+H     { move-column-to-monitor-left; }
+    Mod+Shift+Ctrl+L     { move-column-to-monitor-right; }
+
+    // Named workspaces
+    Mod+1 { focus-workspace "1"; }
+    Mod+2 { focus-workspace "2"; }
+    Mod+3 { focus-workspace "3"; }
+    Mod+4 { focus-workspace "4"; }
+    Mod+5 { focus-workspace "5"; }
+    Mod+6 { focus-workspace 6; }
+    Mod+7 { focus-workspace 7; }
+    Mod+8 { focus-workspace 8; }
+    Mod+9 { focus-workspace 9; }
+
+    // Move to workspaces
+    Mod+Ctrl+1 { move-column-to-workspace "1"; }
+    Mod+Ctrl+2 { move-column-to-workspace "2"; }
+    Mod+Ctrl+3 { move-column-to-workspace "3"; }
+    Mod+Ctrl+4 { move-column-to-workspace "4"; }
+    Mod+Ctrl+5 { move-column-to-workspace "5"; }
+    Mod+Ctrl+6 { move-column-to-workspace 6; }
+    Mod+Ctrl+7 { move-column-to-workspace 7; }
+    Mod+Ctrl+8 { move-column-to-workspace 8; }
+    Mod+Ctrl+9 { move-column-to-workspace 9; }
+
+    // Workspace scrolling
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+
+    // Column management
+    Mod+BracketLeft  { consume-or-expel-window-left; }
+    Mod+BracketRight { consume-or-expel-window-right; }
+    Mod+Comma  { consume-window-into-column; }
+    Mod+Period { expel-window-from-column; }
+
+    // Window sizing
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+    Mod+Ctrl+R { reset-window-height; }
+    Mod+M { maximize-column; }
+    Mod+Shift+F { fullscreen-window; }
+    Super+F { maximize-column; }
+    Mod+C { center-column; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    // Floating
+    Mod+V { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    // Tabbed display
+    Mod+W { toggle-column-tabbed-display; }
+
+    // Screenshot with Satty editor
+    Super+S { spawn-sh "niri msg action screenshot && inotifywait -q -e close_write ~/Pictures/Screenshots/ && satty -f \"$(ls -t ~/Pictures/Screenshots/*.png | head -n 1)\" --initial-tool=arrow --copy-command=wl-copy"; }
+
+    // Media keys
+    XF86AudioRaiseVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1+ -l 1.0"; }
+    XF86AudioLowerVolume allow-when-locked=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.1-"; }
+    XF86AudioMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"; }
+    XF86AudioMicMute allow-when-locked=true { spawn-sh "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"; }
+
+    XF86AudioPlay allow-when-locked=true { spawn-sh "playerctl play-pause"; }
+    XF86AudioStop allow-when-locked=true { spawn-sh "playerctl stop"; }
+    XF86AudioPrev allow-when-locked=true { spawn-sh "playerctl previous"; }
+    XF86AudioNext allow-when-locked=true { spawn-sh "playerctl next"; }
+
+    // Brightness keys
+    XF86MonBrightnessUp allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "+10%"; }
+    XF86MonBrightnessDown allow-when-locked=true { spawn "brightnessctl" "--class=backlight" "set" "10%-"; }
+
+    // System
+    Mod+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
+    Mod+Shift+E { quit; }
+    Mod+Shift+P { power-off-monitors; }
+}
