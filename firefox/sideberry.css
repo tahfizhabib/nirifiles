@@ -1,0 +1,102 @@
+/* --------------------Dark Green Theme-------------------- */
+#root.root {
+    --frame-bg: #3a3d3f;
+    --frame-el-overlay-selected-border: unset;
+    --frame-fg: #eceff4;
+    --general-border-radius: 0px;
+    --nav-btn-active-shadow: none;
+    --notification-bg: #3a3d3f;
+    --notification-fg: #eceff4;
+    --tabs-activated-fg: #eceff4;
+    --tabs-activated-shadow: none;
+    --tabs-discarded-favicon-opacity: 0.6;
+    --tabs-discarded-title-opacity: 0.7;
+    --tabs-font: 1.08rem "Zenbones Mono", monospace;
+    --toolbar-bg: #3a3d3f;
+    --toolbar-el-overlay-selected-border: unset;
+    --toolbar-fg: #eceff4;
+    --frame-el-overlay-selected-bg: rgba(129, 161, 193, 0.4);
+    --toolbar-el-overlay-selected-bg: rgba(129, 161, 193, 0.4);
+    --tabs-activated-bg: rgba(88, 91, 112, 0.6);
+    --toolbar-el-overlay-hover-bg: rgba(88, 91, 112, 0.5);
+    --frame-el-overlay-hover-bg: rgba(88, 91, 112, 0.3);
+}
+
+#root {
+    font-family: "Zenbones Mono", monospace !important;
+}
+
+/* --------------------Tab Numbers Colors-------------------- */
+.Tab {
+    position: relative;
+}
+
+.Tab .title {
+    padding-right: 32px !important;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: "Zenbones Mono", monospace !important;
+}
+
+.Tabs {
+    counter-reset: tab-counter;
+}
+
+.Tab {
+    counter-increment: tab-counter;
+}
+
+.Tab::after {
+    content: counter(tab-counter);
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 20px;
+    font-weight: bold;
+    font-family: "Zenbones Mono", monospace !important;
+    color: #a3be8c;
+    opacity: 1;
+    pointer-events: none;
+    text-shadow: 0 0 2px rgba(163, 190, 140, 0.5);
+    z-index: 10;
+    line-height: 1;
+}
+
+/* Different colors for different numbers */
+.Tab:nth-child(10n + 1)::after {
+    color: #bf616a;
+} /* Red */
+.Tab:nth-child(10n + 2)::after {
+    color: #ebcb8b;
+} /* Yellow */
+.Tab:nth-child(10n + 3)::after {
+    color: #a3be8c;
+} /* Green */
+.Tab:nth-child(10n + 4)::after {
+    color: #8fbcbb;
+} /* Teal */
+.Tab:nth-child(10n + 5)::after {
+    color: #88c0d0;
+} /* Blue */
+.Tab:nth-child(10n + 6)::after {
+    color: #b48ead;
+} /* Purple */
+.Tab:nth-child(10n + 7)::after {
+    color: #d08770;
+} /* Orange */
+.Tab:nth-child(10n + 8)::after {
+    color: #a3be8c;
+} /* Light Green */
+.Tab:nth-child(10n + 9)::after {
+    color: #ebcb8b;
+} /* Gold */
+.Tab:nth-child(10n + 0)::after {
+    color: #bf616a;
+} /* Red */
+
+.Tab:hover::after {
+    opacity: 1;
+    text-shadow: 0 0 4px currentColor;
+}

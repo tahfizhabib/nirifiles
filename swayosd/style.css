@@ -1,0 +1,58 @@
+/* SwayOSD Ultra Minimal - BIGGER Pill Bar */
+
+window {
+    background-color: rgba(36, 39, 41, 0.95);
+    border-radius: 0;
+    border: 2px solid #81a1c1;
+    padding: 2px 4px;
+}
+
+#container {
+    padding: 0px;
+}
+
+/* BIGGER PILL BAR - STRAIGHT AS FUCK */
+progressbar,
+trough {
+    min-height: 10px;
+    min-width: 150px;
+    border-radius: 0;
+    background-color: rgba(68, 68, 76, 0.4);
+}
+
+/* Water fill - STRAIGHT AS FUCK */
+progress {
+    background: #81a1c1;
+    border-radius: 0;
+    min-height: 10px;
+}
+
+/* Micro icon */
+image {
+    color: #81a1c1;
+    padding-right: 3px;
+    min-width: 10px;
+    min-height: 10px;
+}
+
+/* Tiny text */
+label {
+    color: #dedede;
+    font-family: "Zenbones Mono";
+    font-size: 6pt;
+    padding: 0px 1px;
+}
+
+/* Capslock indicator */
+#osd {
+    background-color: rgba(36, 39, 41, 0.95);
+    border-radius: 0;
+    border: 2px solid #81a1c1;
+    padding: 2px 4px;
+}
+
+#osd label {
+    color: #dedede;
+    font-family: "Zenbones Mono";
+    font-size: 6pt;
+}

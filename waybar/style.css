@@ -1,0 +1,263 @@
+/* Waybar Theme Colors - Nord */
+@define-color background #2E3440;
+@define-color foreground #ECEFF4;
+@define-color background-alt rgba(46, 52, 64, 0.99);
+@define-color background-tooltip rgba(46, 52, 64, 0.95);
+@define-color border #D8DEE9;
+@define-color text-muted rgba(236, 239, 244, 0.7);
+@define-color text-hover #ECEFF4;
+@define-color accent rgba(129, 161, 193, 0.25);
+@define-color accent-strong rgba(129, 161, 193, 0.45);
+@define-color urgent #BF616A;
+@define-color urgent-bg rgba(191, 97, 106, 0.25);
+@define-color warning #EBCB8B;
+@define-color warning-bg rgba(235, 203, 139, 0.15);
+@define-color success #A3BE8C;
+@define-color success-bg rgba(163, 190, 140, 0.15);
+
+* {
+    all: unset;
+    font-family: "Zenbones Mono", monospace;
+    font-size: 14px;
+    font-weight: normal;
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @background-alt;
+    color: @foreground;
+    border-bottom: 1.5px solid #81a1c1;
+    border-left: 1.5px solid #81a1c1;
+    border-right: 1.5px solid #81a1c1;
+    border-radius: 0;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.35);
+    margin: 0 50px;
+}
+
+tooltip {
+    background: @background-tooltip;
+    border: 1px solid alpha(@border, 0.2);
+    border-radius: 8px;
+    padding: 8px 10px;
+}
+
+tooltip label {
+    color: @foreground;
+    font-size: 12px;
+}
+
+#workspaces {
+    padding: 0;
+    margin: 0;
+}
+
+#workspaces button {
+    padding: 0 3px;
+    min-width: 10px;
+    color: @text-muted;
+    background-color: transparent;
+    border: none;
+    transition: all 0.2s ease-in-out;
+}
+
+#workspaces button:hover {
+    background-color: @accent;
+    color: @text-hover;
+}
+
+#workspaces button.active {
+    background-color: @accent-strong;
+    color: @foreground;
+}
+
+#workspaces button.urgent {
+    background-color: @urgent-bg;
+    color: @urgent;
+}
+
+#window {
+    padding: 0 8px;
+    color: @text-muted;
+    font-weight: normal;
+    font-size: 10px;
+    transition: color 0.2s ease-in-out;
+}
+
+#window:hover {
+    color: @text-hover;
+}
+
+#tray,
+#network,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#pulseaudio,
+#clock {
+    padding: 0 3px;
+    margin: 0;
+    color: @foreground;
+    background-color: transparent;
+    transition: all 0.2s ease-in-out;
+}
+
+#tray {
+    padding: 0 3px;
+    margin-right: 1px;
+}
+
+#network:hover,
+#cpu:hover,
+#memory:hover,
+#temperature:hover,
+#battery:hover,
+#pulseaudio:hover,
+#clock:hover {
+    background-color: @accent;
+}
+
+#network.disconnected {
+    color: @urgent;
+    background-color: @urgent-bg;
+}
+
+#cpu.warning {
+    color: @warning;
+    background-color: @warning-bg;
+}
+
+#cpu.critical {
+    color: @urgent;
+    background-color: @urgent-bg;
+}
+
+#temperature.critical {
+    color: @urgent;
+    background-color: @urgent-bg;
+}
+
+#battery.warning {
+    color: @warning;
+    background-color: @warning-bg;
+}
+
+#battery.critical {
+    color: @urgent;
+    background-color: @urgent-bg;
+}
+
+#battery.charging,
+#battery.plugged {
+    color: @success;
+    background-color: @success-bg;
+}
+
+#battery.full {
+    color: @success;
+}
+
+#pulseaudio.muted {
+    color: @urgent;
+    background-color: @urgent-bg;
+}
+
+#pulseaudio.source-muted {
+    color: @urgent;
+}
+
+#clock {
+    padding: 0 8px;
+    color: @foreground;
+    letter-spacing: -0.5px;
+}
+
+#clock tooltip {
+    background: @background-tooltip;
+    border: 1px solid alpha(@border, 0.2);
+    border-radius: 0px;
+    padding: 10px;
+}
+
+#clock tooltip label {
+    font-size: 13px;
+}
+
+calendar {
+    background: @background-tooltip;
+    color: @foreground;
+    border-radius: 0px;
+    padding: 8px;
+}
+
+calendar:selected {
+    background: alpha(@border, 0.2);
+    border-radius: 0px;
+}
+
+calendar > grid > label {
+    font-size: 13px;
+    padding: 4px;
+    color: @foreground;
+}
+
+calendar > grid > label.header {
+    font-size: 11px;
+    font-weight: normal;
+    color: @text-muted;
+    padding: 4px;
+}
+
+calendar > grid > label.day-number {
+    font-size: 12px;
+    font-weight: normal;
+    padding: 6px;
+    margin: 2px;
+    border-radius: 0px;
+    min-width: 28px;
+    min-height: 28px;
+}
+
+calendar > grid > label.day-number.today {
+    background: alpha(@border, 0.3);
+    color: @foreground;
+}
+
+calendar > grid > label.day-number.other-month {
+    color: alpha(@foreground, 0.3);
+}
+
+calendar > grid > label.day-number:hover {
+    background: @accent;
+}
+
+calendar > grid > label.week-number {
+    font-size: 9px;
+    color: alpha(@foreground, 0.4);
+    font-weight: normal;
+    padding: 2px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @accent-strong;
+    border-radius: 2px;
+}
+
+#workspaces button:nth-child(10),
+#workspaces button:nth-child(9),
+#workspaces button:nth-child(8),
+#workspaces button:nth-child(7),
+#workspaces button:nth-child(6) {
+    opacity: 0;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    font-size: 0;
+}

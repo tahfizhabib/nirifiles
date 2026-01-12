@@ -1,0 +1,116 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 21,
+  "spacing": 0,
+  "margin-left": 8,
+  "margin-right": 8,
+  "modules-left": ["niri/workspaces"],
+  "modules-center": ["clock"],
+  "modules-right": [
+    "tray",
+    "cpu",
+    "memory",
+    "temperature",
+    "battery",
+    "pulseaudio#sink",
+    "pulseaudio#mic",
+  ],
+
+  "niri/workspaces": {
+    "format": "{name}",
+    "on-click": "activate",
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "󰍛 {usage}%",
+    "tooltip": true,
+    "tooltip-format": "CPU: {usage}%\nLoad: {load}",
+    "on-click": "foot -e btop",
+    "states": {
+      "critical": 85,
+      "warning": 65,
+    },
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "󰓅 {percentage}%",
+    "tooltip-format": "RAM: {used:0.1f}G/{total:0.1f}G ({percentage}%)\nSwap: {swapUsed:0.1f}G/{swapTotal:0.1f}G",
+    "on-click": "foot -e btop",
+  },
+
+  "temperature": {
+    "interval": 5,
+    "critical-threshold": 85,
+    "format": "󰔏 {temperatureC}°",
+    "tooltip-format": "Temperature: {temperatureC}°C",
+  },
+
+  "battery": {
+    "interval": 30,
+    "states": {
+      "warning": 30,
+      "critical": 15,
+    },
+    "format": "{icon} {capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": "󰚥 {capacity}%",
+    "format-full": "󰁹 Full",
+    "format-icons": ["󰂃", "󰁺", "󰁻", "󰁼", "󰁽"],
+    "tooltip-format": "{timeTo}\nCapacity: {capacity}%",
+  },
+
+  "pulseaudio#sink": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰖁 Mute",
+    "format-bluetooth": "󰂯 {volume}%",
+    "format-bluetooth-muted": "󰂲 Mute",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"],
+    },
+    "scroll-step": 2,
+    "on-click": "foot -e pulsemixer",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+    "tooltip-format": "{desc}\nVolume: {volume}%",
+  },
+
+  "pulseaudio#mic": {
+    "format": "{format_source}",
+    "format-source": "󰍬 {volume}%",
+    "format-source-muted": "󰍭 Mute",
+    "scroll-step": 2,
+    "on-click": "foot -e pulsemixer",
+    "on-click-right": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "tooltip-format": "{source_desc}\nVolume: {source_volume}%",
+  },
+
+  "clock": {
+    "interval": 60,
+    "format": "{:%H:%M %a, %b %d}",
+    "tooltip-format": "<tt><small>{calendar}</small></tt>",
+    "calendar": {
+      "mode": "month",
+      "mode-mon-col": 3,
+      "weeks-pos": "right",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#ffffff'><b>{}</b></span>",
+        "days": "<span color='#ffffff'>{}</span>",
+        "weeks": "<span color='#888888'><b>W{}</b></span>",
+        "weekdays": "<span color='#cccccc'><b>{}</b></span>",
+        "today": "<span color='#ffffff' bgcolor='#444444'><b> {} </b></span>",
+      },
+    },
+    "actions": {
+      "on-click-right": "mode",
+    },
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 4,
+    "show-passive-items": true,
+  },
+}

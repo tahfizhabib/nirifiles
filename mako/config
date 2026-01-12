@@ -1,0 +1,46 @@
+background-color=#242729
+text-color=#dedede
+border-color=#81a1c1
+border-radius=0
+border-size=2
+progress-color=#81a1c1
+
+# General
+default-timeout=3000
+width=350
+height=200
+padding=12
+layer=overlay
+font=Zenbones Mono 11
+
+# Volume OSD
+[app-name=volume]
+group-by=app-name
+format=<b>%s</b>\n%b
+
+[app-name=volume group-index=0]
+invisible=0
+
+# Brightness OSD
+[app-name=brightness]
+group-by=app-name
+format=<b>%s</b>\n%b
+
+[app-name=brightness group-index=0]
+invisible=0
+
+# Themeing
+[app-name=theme]
+group-by=app-name
+format=<b>%s</b>\n%b
+
+[app-name=theme group-index=0]
+invisible=0
+
+# Music
+[app-name=music]
+group-by=app-name
+format=<b>%s</b>\n%b
+
+[app-name=music group-index=0]
+invisible=0

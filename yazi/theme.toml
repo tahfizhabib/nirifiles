@@ -1,0 +1,34 @@
+# lf-esque theme
+
+[mode]
+normal_main = { fg = "black", bg = "blue", bold = true }
+normal_alt = { fg = "blue", bg = "black" }
+
+select_main = { fg = "black", bg = "green", bold = true }
+select_alt = { fg = "green", bg = "black" }
+
+unset_main = { fg = "black", bg = "yellow", bold = true }
+unset_alt = { fg = "yellow", bg = "black" }
+
+[mgr]
+border_symbol = " "
+
+[filetype]
+rules = [
+	{ name = "*", is = "exec", fg = "green" },
+	{ name = "*", is = "orphan", fg = "red" },
+	{ name = "*/", is = "link", fg = "green" },
+	{ name = "*", is = "link", fg = "green" },
+	{ name = "*/", fg = "blue" },
+	{ name = "*", fg = "white" },
+]
+
+[status]
+sep_left = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_type = {}
+perm_read = {}
+perm_write = {}
+perm_exec = {}
+perm_sep = {}
