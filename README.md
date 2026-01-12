@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://private-user-images.githubusercontent.com/1794388/483874013-07d05cd0-d5dc-4a28-9a35-51bae8f119a0.svg?jwt=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NjY1MDMzMTYsIm5iZiI6MTc2NjUwMzAxNiwicGF0aCI6Ii8xNzk0Mzg4LzQ4Mzg3NDAxMy0wN2QwNWNkMC1kNWRjLTRhMjgtOWEzNS01MWJhZThmMTE5YTAuc3ZnP1gtQW16LUFsZ29yaXRobT1BV1M0LUhNQUMtU0hBMjU2JlgtQW16LUNyZWRlbnRpYWw9QUtJQVZDT0RZTFNBNTNQUUs0WkElMkYyMDI1MTIyMyUyRnVzLWVhc3QtMSUyRnMzJTJGYXdzNF9yZXF1ZXN0JlgtQW16LURhdGU9MjAyNTEyMjNUMTUxNjU2WiZYLUFtei1FeHBpcmVzPTMwMCZYLUFtei1TaWduYXR1cmU9YTczMGUyM2MyMTc5NWVkM2I2N2FiOTcyZDVkNmM5NWQwNzZjMzU0NmY1MGNmNzYyZjJjZmNiMjI3NmM2YmI4NyZYLUFtei1TaWduZWRIZWFkZXJzPWhvc3QifQ.D-1XpnX1aUGvsCnYIBD7HzdHNkSwA3-Z1LW32WejpKY" alt="Niri Logo" width="120"/>
   
   # Nirifiles
   
@@ -35,26 +34,22 @@ Niri is a scrollable-tiling Wayland compositor with a fresh approach to window m
 |---------|---------|
 | `niri` | Wayland compositor |
 | `waybar` | Status bar |
-| `swaybg` | Wallpaper daemon |
+| `swww` | Wallpaper daemon |
 | `walker` | Application launcher |
 | `foot` | Terminal emulator |
-| `ttf-jetbrains-mono` | JetBrains Mono font |
-| `ttf-jetbrains-mono-nerd` | JetBrains Nerd font |
-| `ttf-pragmasevka-nerd-font` | Pragmasevka Nerd font |
+| `fuzzel` | Alternative launcher |
+| `Bibata-Modern-Classic` | Cursor theme |
 
 ### Applications
 | Package | Purpose |
 |---------|---------|
 | `firefox` | Web browser |
-| `spotify-launcher` | Music streaming |
+| `spotify` | Music streaming |
 | `gnome-calendar` | Calendar app |
 | `gnome-calculator` | Calculator |
-| `gnome-disks-utility` | Disk management |
-| `gnome-photos` | Photo viewer |
-| `evince-no-gnome` | Document viewer |
-| `pacseek` | Package manager TUI |
-| `ayugram-desktop-bin` | Telegram client |
-| `zed` | Code editor |
+| `nautilus` | File manager |
+| `nvim` | Text editor |
+| `pavucontrol` | Audio control |
 
 </td>
 <td width="50%" valign="top">
@@ -64,46 +59,11 @@ Niri is a scrollable-tiling Wayland compositor with a fresh approach to window m
 |---------|---------|
 | `swaylock` | Screen locker |
 | `satty` | Screenshot editor |
-| `inotify-tools` | File system monitoring |
-| `wireplumber` | Audio management |
+| `inotify-tools` | File monitoring |
+| `swayosd-server` | OSD notifications |
+| `elephant` | System monitor |
 | `playerctl` | Media control |
-| `brightnessctl` | Brightness control |
-| `wl-clipboard` | Clipboard manager |
-
-### Installation
-
-**Core System:**
-```bash
-# Arch-based systems
-yay -S niri waybar swaybg walker foot \
-       ttf-jetbrains-mono ttf-jetbrains-mono-nerd \
-       ttf-pragmasevka-nerd-font
-```
-
-**Applications:**
-```bash
-yay -S firefox spotify-launcher gnome-calendar \
-       gnome-calculator gnome-disks-utility \
-       gnome-photos evince-no-gnome pacseek \
-       ayugram-desktop-bin zed
-```
-
-**Utilities & Tools:**
-```bash
-yay -S swaylock satty inotify-tools \
-       wireplumber playerctl brightnessctl \
-       wl-clipboard
-```
-
-**Start Niri:**
-```bash
-# From TTY
-niri-session
-
-# Or with display manager (SDDM)
-sudo pacman -S sddm
-sudo systemctl enable sddm --now
-```
+| `wl-copy` | Clipboard utility |
 
 </td>
 </tr>
@@ -119,112 +79,53 @@ sudo systemctl enable sddm --now
 <tr>
 <td width="50%" valign="top">
 
-### System Control
+### System
 | Keybind | Action |
 |---------|--------|
-| `Super + Shift + E` | Quit compositor |
 | `Super + Q` | Close window |
-| `Super + Shift + /` | Show hotkey overlay |
+| `Super + Shift + E` | Quit compositor |
 | `Super + Alt + L` | Lock screen |
-| `Super + Shift + P` | Power off monitors |
-| `Super + Escape` | Toggle shortcuts inhibit |
 
-### Launch Applications
+### Applications
 | Keybind | Action |
 |---------|--------|
-| `Super + D` | Application launcher (Walker) |
-| `Super + Return` | Terminal (Foot) |
-| `Super + T` | Terminal (Foot) |
-| `Super + N` | Neovim in terminal |
+| `Super + D` | Application launcher |
+| `Super + Return` | Terminal |
 | `Super + B` | Firefox |
-| `Super + E` | File manager (Nautilus) |
-| `Super + Shift + M` | Spotify |
-| `Super + Shift + C` | Calendar |
-| `Super + Space` | Window switcher (Vicinae) |
+| `Super + E` | File manager |
+| `Super + Space` | Window switcher |
 
-### Window Focus
+### Focus & Movement
 | Keybind | Action |
 |---------|--------|
-| `Super + H/J/K/L` | Focus direction (Vim) |
-| `Super + Arrow Keys` | Focus direction (Arrows) |
-
-### Window Movement
-| Keybind | Action |
-|---------|--------|
-| `Super + Ctrl + H/J/K/L` | Move window (Vim) |
-| `Super + Ctrl + Arrow Keys` | Move window (Arrows) |
-
-### Monitor Management
-| Keybind | Action |
-|---------|--------|
-| `Super + Shift + H/L` | Focus monitor |
-| `Super + Shift + Arrow Keys` | Focus monitor |
-| `Super + Shift + Ctrl + H/L` | Move to monitor |
-| `Super + Shift + Ctrl + Arrow Keys` | Move to monitor |
-
-### Workspace Navigation
-| Keybind | Action |
-|---------|--------|
-| `Super + 1-9` | Switch to workspace |
-| `Super + Scroll Wheel` | Cycle workspaces |
-| `Super + O` | Toggle overview mode |
+| `Super + H/J/K/L` | Focus direction |
+| `Super + Ctrl + H/J/K/L` | Move window |
+| `Alt + Tab` | Next window |
 
 </td>
 <td width="50%" valign="top">
 
-### Move Window to Workspace
+### Workspaces
 | Keybind | Action |
 |---------|--------|
-| `Super + Ctrl + 1-9` | Move window to workspace |
+| `Super + 1-9` | Switch workspace |
+| `Super + Ctrl + 1-9` | Move to workspace |
+| `Super + Scroll` | Cycle workspaces |
 
-### Column Management
+### Window Management
 | Keybind | Action |
 |---------|--------|
-| `Super + [` | Consume/expel window left |
-| `Super + ]` | Consume/expel window right |
-| `Super + ,` | Consume window into column |
-| `Super + .` | Expel window from column |
-| `Super + W` | Toggle column tabbed display |
-
-### Window Sizing
-| Keybind | Action |
-|---------|--------|
-| `Super + R` | Switch preset column width |
-| `Super + Shift + R` | Switch preset window height |
-| `Super + Ctrl + R` | Reset window height |
-| `Super + M` | Maximize column |
-| `Super + Shift + F` | Fullscreen window |
 | `Super + F` | Maximize column |
+| `Super + V` | Toggle floating |
+| `Super + -/=` | Resize width |
 | `Super + C` | Center column |
-| `Super + -` | Decrease column width |
-| `Super + =` | Increase column width |
-| `Super + Shift + -` | Decrease window height |
-| `Super + Shift + =` | Increase window height |
 
-### Floating Windows
+### Media & Screenshots
 | Keybind | Action |
 |---------|--------|
-| `Super + V` | Toggle window floating |
-| `Super + Shift + V` | Switch float/tiling focus |
-
-### Screenshots
-| Keybind | Action |
-|---------|--------|
-| `Super + S` | Screenshot → Satty editor → Auto-copy |
-
-### Media Controls
-| Keybind | Action |
-|---------|--------|
-| `XF86AudioRaiseVolume` | Volume up |
-| `XF86AudioLowerVolume` | Volume down |
-| `XF86AudioMute` | Toggle mute |
-| `XF86AudioMicMute` | Toggle mic mute |
+| `Super + S` | Screenshot editor |
 | `XF86AudioPlay` | Play/Pause |
-| `XF86AudioStop` | Stop |
-| `XF86AudioPrev` | Previous track |
-| `XF86AudioNext` | Next track |
-| `XF86MonBrightnessUp` | Brightness up |
-| `XF86MonBrightnessDown` | Brightness down |
+| `XF86AudioRaiseVolume` | Volume up |
 
 </td>
 </tr>
@@ -232,12 +133,48 @@ sudo systemctl enable sddm --now
 
 <div align="center">
   
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=35&duration=2000&pause=1000&color=E0AF68&center=true&vCenter=true&width=435&lines=Highlights" alt="Highlights" />
+  
+</div>
+
+### Layout & Appearance
+- **Gaps:** 10px between windows
+- **Focus Ring:** 1.5px Nordic blue (#81A1C1)
+- **Column Widths:** 33%, 50%, 66% presets
+- **Window Opacity:** 99% global transparency
+- **Animations:** 0.8x slowdown for smoothness
+
+### Display Setup
+- **Primary (DP-1):** 1920x1080 @ 320Hz
+- **Secondary (HDMI-A-1):** 1920x1080 @ 75Hz
+- **Workspaces:** 5 named workspaces
+
+### Input
+- **Cursor:** Bibata-Modern-Classic, auto-hide after 5s
+- **Touchpad:** Tap-to-click, natural scrolling
+- **Focus:** Follows mouse with 90% scroll threshold
+
+### Startup
+Waybar, SWWW daemon, Walker, Elephant, SwayOSD server
+
+<div align="center">
+  
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=35&duration=2000&pause=1000&color=BB9AF7&center=true&vCenter=true&width=435&lines=Previews" alt="Previews" />
   
 </div>
 
-![Preview 1](https://github.com/user-attachments/assets/b20321bd-0954-4dbc-9d06-dbff5a18f82b)
+![Preview 1](https://github.com/user-attachments/assets/f40da900-afd7-4006-bbf4-b39e1aa7b60d)
 
-![Preview 2](https://github.com/user-attachments/assets/d7696245-2c79-49f0-a1f6-6c9b593c7a3c)
+![Preview 2](https://github.com/user-attachments/assets/7066dcf9-d423-42ac-b2eb-7a4e33525388)
 
-![Preview 3](https://github.com/user-attachments/assets/ac3951d6-294b-466a-a793-96a8f65b35a0)
+![Preview 3](https://github.com/user-attachments/assets/9359a602-4ec9-4bbf-90fb-04a00d054cf9)
+
+![Preview 4](https://github.com/user-attachments/assets/3fd95c94-9ce5-4fc9-97f8-25739eee4588)
+
+---
+
+<div align="center">
+  
+Made for the <3 of Niri
+  
+</div>
