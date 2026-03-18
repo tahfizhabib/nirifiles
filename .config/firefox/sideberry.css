@@ -1,0 +1,152 @@
+#root.root {
+    --frame-bg: #282828;
+    --frame-el-overlay-selected-border: unset;
+    --frame-fg: #ffffff;
+    --general-border-radius: 0px;
+    --nav-btn-active-shadow: none;
+    --notification-bg: #282828;
+    --notification-fg: #ffffff;
+    --tabs-activated-fg: #ffffff;
+    --tabs-activated-shadow: none;
+    --tabs-discarded-favicon-opacity: 0.6;
+    --tabs-discarded-title-opacity: 0.7;
+    --tabs-font: 1.1rem "Google Sans", sans-serif;
+    --toolbar-bg: #282828;
+    --toolbar-el-overlay-selected-border: unset;
+    --toolbar-fg: #ffffff;
+    --frame-el-overlay-selected-bg: hsl(0, 0%, 50%, 0.5);
+    --toolbar-el-overlay-selected-bg: hsl(0, 0%, 50%, 0.5);
+    --tabs-activated-bg: hsl(0, 0%, 50%, 0.28);
+    --toolbar-el-overlay-hover-bg: hsl(0, 0%, 50%, 0.28);
+    --frame-el-overlay-hover-bg: hsl(0, 0%, 50%, 0.17);
+    --tabs-indent: 0px !important;
+}
+
+#root {
+    font-family: "Google Sans", sans-serif !important;
+    color: #ffffff !important;
+}
+
+/* --------------------main-------------------- */
+
+#root.root {
+    --nav-btn-height: 35px;
+}
+
+.Tab {
+    margin: 0;
+    width: 100%;
+    padding-bottom: unset;
+    position: relative;
+    /* Remove all indentation for child tabs */
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* Remove tree indent */
+.Tab .t-box {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+/* Favicon size */
+.Tab .img,
+.Tab img,
+.Tab .favicon,
+.Tab-icon {
+    width: 16px !important;
+    height: 16px !important;
+    min-width: 16px !important;
+}
+
+#root[data-pinned-tabs-position="panel"][data-pinned-tabs-list="true"]
+    .PinnedTabsBar {
+    padding: 0;
+}
+
+.PinnedTabsBar:after {
+    display: none !important;
+}
+
+.PinnedTabsBar * {
+    font-weight: 600 !important;
+}
+
+.NavigationBar .main-items {
+    grid-gap: 0;
+}
+
+.Notifications + .main-box .central-box {
+    margin-top: 0;
+}
+
+.NavigationBar.-vert {
+    padding: 0;
+}
+
+/* --------------------Tab Numbers-------------------- */
+
+.Tabs {
+    counter-reset: tab-counter;
+}
+
+.Tab {
+    counter-increment: tab-counter;
+}
+
+.Tab .title {
+    font-family: "Google Sans", sans-serif !important;
+    font-size: 1.1rem !important;
+    overflow: hidden;
+    text-overflow: clip !important;
+    white-space: nowrap;
+    padding-right: 28px !important;
+    max-width: calc(100% - 28px) !important;
+    color: #ffffff !important;
+}
+
+.Tab::after {
+    content: counter(tab-counter);
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.35rem;
+    font-weight: normal;
+    font-family: "Google Sans", sans-serif !important;
+    opacity: 0.85;
+    pointer-events: none;
+    z-index: 10;
+    background: inherit;
+}
+
+/* Rainbow colors */
+.Tab:nth-child(7n + 1)::after {
+    color: #ff4f4f;
+}
+.Tab:nth-child(7n + 2)::after {
+    color: #ff9f43;
+}
+.Tab:nth-child(7n + 3)::after {
+    color: #ffd32a;
+}
+.Tab:nth-child(7n + 4)::after {
+    color: #0be881;
+}
+.Tab:nth-child(7n + 5)::after {
+    color: #4fc3f7;
+}
+.Tab:nth-child(7n + 6)::after {
+    color: #8873f4;
+}
+.Tab:nth-child(7n + 0)::after {
+    color: #f368e0;
+}
+
+.Tab:hover::after {
+    opacity: 1;
+}
