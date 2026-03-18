@@ -1,0 +1,488 @@
+// NIRI COMPOSITOR CONFIGURATION
+
+// STARTUP
+
+spawn-at-startup "swww-daemon"
+spawn-at-startup "quickshell" "-c" "niriha"
+spawn-at-startup "wl-paste" "--watch" "cliphist" "store"
+
+// INPUT DEVICES
+
+input {
+    keyboard {
+        xkb {
+            layout "us"
+        }
+        repeat-delay 300
+        repeat-rate 25
+    }
+
+    mouse {
+        accel-speed 0.8
+        accel-profile "flat"
+    }
+
+    touchpad {
+        tap
+        dwt
+        natural-scroll
+        accel-speed 0.2
+    }
+}
+
+// OUTPUT CONFIGURATION
+
+output "HDMI-A-1" {
+    mode "1920x1080@239.964"
+    scale 1.0
+    transform "normal"
+}
+
+// LAYOUT
+
+layout {
+    gaps 11
+
+    center-focused-column "on-overflow"
+    always-center-single-column
+
+    background-color "transparent"
+
+    default-column-width { proportion 0.5; }
+
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    preset-window-heights {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+
+    focus-ring {
+        off
+    }
+
+    border {
+        on
+
+        width 0
+        active-gradient from="#ffd75f" to="#ffafd7"
+        inactive-color "#5eaaff"
+    }
+
+
+    shadow {
+        on
+
+        softness 60
+        spread 5
+        offset x=0 y=10
+        color "#00000059"
+    }
+
+    insert-hint {
+        color "#5f472dAA"
+    }
+
+    default-column-display "tabbed"
+
+    tab-indicator {
+        hide-when-single-tab
+        length total-proportion=1.002
+        gap 0
+        width 3
+        position "top"
+        inactive-color "#00000000"
+        active-color "#af87ff"
+    }
+}
+
+// WORKSPACES
+
+workspace "1"
+workspace "2"
+workspace "3"
+workspace "4"
+
+// VISUAL PREFERENCES
+
+prefer-no-csd
+
+hotkey-overlay {
+    hide-not-bound
+    skip-at-startup
+}
+
+// OVERVIEW
+
+overview {
+    zoom 0.5
+    backdrop-color "#00000080"
+
+    workspace-shadow {
+        off
+    }
+}
+
+// SCREENSHOT
+
+screenshot-path "~/Pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// WINDOW SWITCHER
+
+recent-windows {
+    debounce-ms 750
+    open-delay-ms 150
+
+    highlight {
+        active-color "#777777ff"
+        urgent-color "#ff9999ff"
+        padding 30
+        corner-radius 0
+    }
+
+    previews {
+        max-height 480
+        max-scale 0.5
+    }
+}
+
+// WINDOW RULES
+
+window-rule {
+    match is-active=false
+    draw-border-with-background false
+    clip-to-geometry true
+    opacity 0.92
+    border {
+        off
+    }
+}
+
+window-rule {
+    match is-active=true
+    draw-border-with-background false
+    clip-to-geometry true
+    opacity 0.98
+}
+
+window-rule {
+    geometry-corner-radius 0
+}
+
+window-rule {
+    match is-floating=true
+    geometry-corner-radius 0
+}
+
+window-rule {
+    open-floating false
+    open-maximized false
+}
+
+// FLOATING WINDOW RULES
+
+window-rule {
+    match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+    open-floating true
+}
+
+window-rule {
+    match app-id="swayfloat"
+    open-floating true
+}
+
+window-rule {
+    match app-id="^foot" title="^floating"
+    open-floating true
+}
+
+window-rule {
+    match app-id="ripdrag"
+    open-floating true
+}
+
+window-rule {
+    match title=r#"^(Open|Save|Select|Choose)"#
+    open-floating true
+}
+
+window-rule {
+    match app-id=r#"^(pavucontrol|gnome-calculator|org\.gnome\.Calculator)$"#
+    open-floating true
+}
+
+// OPACITY RULES
+
+window-rule {
+    match app-id="^kitty$"
+    opacity 1.0
+}
+
+window-rule {
+    match app-id="^swayimg$"
+    opacity 1.0
+}
+
+window-rule {
+    match app-id="^foot"
+    opacity 1.0
+}
+
+// TILED STATE RULES
+
+window-rule {
+    match app-id="dev.zed.Zed"
+    tiled-state true
+}
+
+// TERMINAL WIDTH PRESETS
+
+window-rule {
+    match app-id=r#"foot|ghostty|kitty|wezterm"#
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="^foot" title="half"
+    default-column-width { proportion 0.5; }
+}
+
+window-rule {
+    match app-id="^foot" title="third"
+    default-column-width { proportion 0.33333; }
+}
+
+window-rule {
+    match app-id="^foot" title="fourth"
+    default-column-width { proportion 0.25; }
+}
+
+window-rule {
+    match app-id="^foot" title="fifth"
+    default-column-width { proportion 0.2; }
+}
+
+window-rule {
+    match app-id="^foot" title="seventh"
+    default-column-width { proportion 0.15; }
+}
+
+window-rule {
+    match app-id="^foot" title="tenth"
+    default-column-width { proportion 0.1; }
+}
+
+// APP-SPECIFIC WIDTH RULES
+
+window-rule {
+    match app-id=r#"spotify"#
+    default-column-width { proportion 0.66667; }
+}
+
+window-rule {
+    match app-id=r#"nautilus|org\.gnome\.Nautilus"#
+    default-column-width { proportion 0.66667; }
+}
+
+// LAYER RULES
+
+layer-rule {
+    match namespace="^swww*"
+    place-within-backdrop true
+}
+
+// ANIMATIONS
+
+animations {
+    workspace-switch {
+        spring damping-ratio=1.15 stiffness=850 epsilon=0.0001
+    }
+
+    horizontal-view-movement {
+        spring damping-ratio=1.15 stiffness=850 epsilon=0.0001
+    }
+
+    window-movement {
+        spring damping-ratio=1.15 stiffness=850 epsilon=0.0001
+    }
+
+    window-resize {
+        spring damping-ratio=1.15 stiffness=850 epsilon=0.0001
+    }
+
+    window-open {
+        duration-ms 150
+        curve "ease-out-expo"
+    }
+
+    window-close {
+        duration-ms 500
+        curve "linear"
+        custom-shader r"
+        vec4 fall_and_rotate(vec3 coords_geo, vec3 size_geo) {
+            float progress = niri_clamped_progress * niri_clamped_progress;
+            vec2 coords = (coords_geo.xy - vec2(0.5, 1.0)) * size_geo.xy;
+            coords.y -= progress * 1440.0;
+            float random = (niri_random_seed - 0.5) / 2.0;
+            random = sign(random) - random;
+            float max_angle = 1.5 * random;
+            float angle = progress * max_angle;
+            mat2 rotate = mat2(cos(angle), -sin(angle), sin(angle), cos(angle));
+            coords = rotate * coords;
+            coords_geo = vec3(coords / size_geo.xy + vec2(0.5, 1.0), 1.0);
+            vec3 coords_tex = niri_geo_to_tex * coords_geo;
+            vec4 color = texture2D(niri_tex, coords_tex.st);
+            return color;
+        }
+        vec4 close_color(vec3 coords_geo, vec3 size_geo) {
+            return fall_and_rotate(coords_geo, size_geo);
+        }"
+    }
+
+    screenshot-ui-open {
+        duration-ms 250
+        curve "ease-out-quad"
+    }
+}
+
+// GESTURES
+
+gestures {
+    hot-corners {
+        top-left
+    }
+}
+
+// KEYBINDINGS
+
+binds {
+    // APPLICATIONS
+
+    Mod+Return { spawn "foot"; }
+    Mod+Space { spawn "sh" "-c" "qs ipc -c niriha call launcher toggle"; }
+    Mod+D { spawn "fuzzel"; }
+    Mod+Shift+W { spawn "sh" "-c" "qs ipc -c niriha call wallpaper toggle"; }
+
+    // OVERVIEW
+
+    Mod+O { toggle-overview; }
+
+    // SCREENSHOTS
+
+    Print { screenshot; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
+
+    // WINDOW MANAGEMENT
+
+    Mod+Q { close-window; }
+    Mod+F { maximize-column; }
+
+    // FLOATING WINDOWS
+
+    Mod+V { toggle-window-floating; }
+    Mod+Shift+V { switch-focus-between-floating-and-tiling; }
+
+    // FOCUS NAVIGATION
+
+    Mod+H { focus-column-left; }
+    Mod+L { focus-column-right; }
+    Mod+J { focus-window-down; }
+    Mod+K { focus-window-up; }
+    Mod+Left { focus-column-left; }
+    Mod+Right { focus-column-right; }
+    Mod+Down { focus-window-down; }
+    Mod+Up { focus-window-up; }
+
+    // WINDOW MOVEMENT
+
+    Mod+Shift+H { move-column-left; }
+    Mod+Shift+L { move-column-right; }
+    Mod+Shift+J { move-window-down; }
+    Mod+Shift+K { move-window-up; }
+    Mod+Shift+Left { move-column-left; }
+    Mod+Shift+Right { move-column-right; }
+    Mod+Shift+Down { move-window-down; }
+    Mod+Shift+Up { move-window-up; }
+
+    // WORKSPACE NAVIGATION
+
+    Mod+1 { focus-workspace 1; }
+    Mod+2 { focus-workspace 2; }
+    Mod+3 { focus-workspace 3; }
+    Mod+4 { focus-workspace 4; }
+
+    Mod+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Mod+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
+
+    // MOVE WINDOW TO WORKSPACE
+
+    Mod+Shift+1 { move-column-to-workspace 1; }
+    Mod+Shift+2 { move-column-to-workspace 2; }
+    Mod+Shift+3 { move-column-to-workspace 3; }
+    Mod+Shift+4 { move-column-to-workspace 4; }
+
+    Mod+Ctrl+1 { move-window-to-workspace 1; }
+    Mod+Ctrl+2 { move-window-to-workspace 2; }
+    Mod+Ctrl+3 { move-window-to-workspace 3; }
+    Mod+Ctrl+4 { move-window-to-workspace 4; }
+
+    // COLUMN & WINDOW SIZING
+
+    Mod+R { switch-preset-column-width; }
+    Mod+Shift+R { switch-preset-window-height; }
+
+    Mod+Minus { set-column-width "-10%"; }
+    Mod+Equal { set-column-width "+10%"; }
+
+    Mod+Shift+Minus { set-window-height "-10%"; }
+    Mod+Shift+Equal { set-window-height "+10%"; }
+
+    Mod+Period { set-column-width "+10%"; }
+    Mod+Shift+Period { set-window-height "+10%"; }
+
+    // MEDIA CONTROLS
+
+    XF86AudioRaiseVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%+"; }
+    XF86AudioLowerVolume { spawn "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "5%-"; }
+    XF86AudioMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle"; }
+    XF86AudioMicMute { spawn "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle"; }
+
+    XF86AudioPlay { spawn "playerctl" "play-pause"; }
+    XF86AudioPause { spawn "playerctl" "play-pause"; }
+    XF86AudioNext { spawn "playerctl" "next"; }
+    XF86AudioPrev { spawn "playerctl" "previous"; }
+
+    // BRIGHTNESS CONTROLS
+
+    XF86MonBrightnessUp { spawn "brightnessctl" "set" "5%+"; }
+    XF86MonBrightnessDown { spawn "brightnessctl" "set" "5%-"; }
+
+    // SYSTEM CONTROLS
+
+    Mod+Shift+E { quit; }
+    Mod+Shift+P { power-off-monitors; }
+}
+
+// Enable blur behind the foot terminal.
+window-rule {
+    match app-id="^foot$"
+ 
+    background-effect {
+        blur true
+    }
+}
+
+// Enable blur behind the fuzzel launcher.
+layer-rule {
+    match namespace="^launcher$"
+
+    background-effect {
+        blur true
+    }
+}
