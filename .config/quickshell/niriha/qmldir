@@ -1,0 +1,13 @@
+Bar 1.0 Bar.qml
+ActionBar 1.0 ActionBar.qml
+AppLauncher 1.0 AppLauncher.qml
+WallpaperMenu 1.0 WallpaperMenu.qml
+TrayPill 1.0 TrayPill.qml
+NotificationPopup 1.0 NotificationPopup.qml
+ControlCenter 1.0 ControlCenter.qml
+CalendarPopup 1.0 CalendarPopup.qml
+CCSlider 1.0 CCSlider.qml
+CCToggle 1.0 CCToggle.qml
+singleton NotificationService 1.0 NotificationService.qml
+singleton SystemStats 1.0 SystemStats.qml
+StatsPopup 1.0 StatsPopup.qml
